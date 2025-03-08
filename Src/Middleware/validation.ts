@@ -1,5 +1,6 @@
 import  { ObjectSchema } from 'joi'
 import { AppNext, AppRequest, AppResponse } from "../Utils/type"
+import { AppError } from '../Utils/AppError/AppError'
 
 
 export const isValid =(schema:ObjectSchema)=>{

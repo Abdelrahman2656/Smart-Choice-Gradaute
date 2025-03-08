@@ -1,3 +1,4 @@
+import { AppError } from "../Utils/AppError/AppError";
 import { AppNext, AppRequest, AppResponse } from "../Utils/type";
 
 export const asyncHandler=( fn: (req:AppRequest,res:AppResponse,next:AppNext) => Promise<any>)=>{

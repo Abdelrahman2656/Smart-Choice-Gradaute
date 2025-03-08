@@ -12,6 +12,9 @@ gender:string,
 phone:string,
 isDeleted:boolean;
 role:string
+otpEmail:String
+expiredDateOtp:Date
+DOB:string
 }
 
 const userSchema = new Schema<IUser>({
@@ -39,7 +42,7 @@ email:{
 password:{
     type:String,
     required:true,
-    minlength:8,
+ 
     trim:true
 },
 phone:{
@@ -64,7 +67,13 @@ gender:{
 isDeleted: {
     type: Boolean,
     default: false
-}
+},
+DOB: {
+    type: String,
+    default: () => new Date().toISOString() // ISO format string of the current date and time
+},
+otpEmail:String,
+expiredDateOtp:Date
 })
 //model
 export const User = model<IUser>('User',userSchema)

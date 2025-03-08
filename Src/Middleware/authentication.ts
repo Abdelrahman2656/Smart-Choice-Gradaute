@@ -1,4 +1,5 @@
 import { User } from "../../Database";
+import { AppError } from "../Utils/AppError/AppError";
 import { messages } from "../Utils/constant/messages";
 import { verifyToken } from "../Utils/Token/token"
 import { AppNext, AppRequest, AppResponse } from "../Utils/type"
@@ -10,9 +11,13 @@ export const isAuthentication =()=>{
     return async(req:AuthenticatedRequest,res:AppResponse, next:AppNext)=>{
        try{
   // get token 
-  const token = req.headers["authorization"] as string | undefined;
+  
+let{authorization} = req.headers
+if (!authorization?.startsWith('abdelrahman')) {
+  return next(new AppError('Invalid Bearer Token',401))
+}
 
-
+let token = authorization.split(' ')[1]
   if (!token){
     return next(new AppError('Token Required',401))
   }

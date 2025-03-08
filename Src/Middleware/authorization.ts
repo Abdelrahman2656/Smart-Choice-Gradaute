@@ -1,3 +1,4 @@
+import { AppError } from "../Utils/AppError/AppError";
 import { messages } from "../Utils/constant/messages";
 import { AppNext, AppRequest, AppResponse } from "../Utils/type"
 interface AuthenticatedRequest extends AppRequest {

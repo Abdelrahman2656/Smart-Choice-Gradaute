@@ -27,7 +27,6 @@ const userSchema = new mongoose_1.Schema({
     password: {
         type: String,
         required: true,
-        minlength: 8,
         trim: true
     },
     phone: {
@@ -52,7 +51,13 @@ const userSchema = new mongoose_1.Schema({
     isDeleted: {
         type: Boolean,
         default: false
-    }
+    },
+    DOB: {
+        type: String,
+        default: () => new Date().toISOString() // ISO format string of the current date and time
+    },
+    otpEmail: String,
+    expiredDateOtp: Date
 });
 //model
 exports.User = (0, mongoose_1.model)('User', userSchema);

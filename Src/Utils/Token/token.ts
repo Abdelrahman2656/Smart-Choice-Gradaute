@@ -1,13 +1,15 @@
-import jwt, { JwtPayload } from 'jsonwebtoken'
+import jwt, { JwtPayload, SignOptions } from 'jsonwebtoken'
+import { AppError } from '../AppError/AppError'
 interface Token {
     [key:string]:any
 }
 interface GenerateToken {
     payload:Token,
-    secretKey?:string
+    secretKey?:string,
+    options?: SignOptions;
 }
-export const generateToken =({payload , secretKey = process.env.SECRET_TOKEN as string}:GenerateToken):string=>{
-return jwt.sign(payload,secretKey)
+export const generateToken =({payload , secretKey = process.env.SECRET_TOKEN as string,options}:GenerateToken):string=>{
+return jwt.sign(payload,secretKey,options)
 }
 //verify
 interface VerifyToken {
