@@ -11,7 +11,7 @@ export const bootstrap = (
 ) => {
   //-----------------------------------------------parse------------------------------------------------------------
   app.use(express.json());
-  app.use(express.urlencoded({ extended: true }));
+
   dotenv.config({ path: path.resolve("./config/.env") });
   app.use(cors({
    origin: '*', 
