@@ -1,13 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.changePassword = exports.forgetPassword = exports.refreshToken = exports.activateAccount = exports.login = exports.ConfirmEmail = exports.signUp = void 0;
-const nanoid_1 = require("nanoid");
 const Database_1 = require("../../../Database");
 const AppError_1 = require("../../Utils/AppError/AppError");
 const messages_1 = require("../../Utils/constant/messages");
 const emailEvent_1 = require("../../Utils/Email/emailEvent");
 const encryption_1 = require("../../Utils/encryption");
 const token_1 = require("../../Utils/Token/token");
+const otp_1 = require("../../Utils/otp");
 //---------------------------------------------------Sign Up --------------------------------------------------------------
 const signUp = async (req, res, next) => {
     //get data from req
@@ -181,7 +181,7 @@ const forgetPassword = async (req, res, next) => {
         return next(new AppError_1.AppError(messages_1.messages.user.AlreadyHasOtp, 400));
     }
     //generate OTP
-    let forgetOTP = String(Number((0, nanoid_1.customAlphabet)("123456789", 6)()));
+    let forgetOTP = String((0, otp_1.generateOTP)());
     //hash
     userExist.otpEmail = forgetOTP;
     userExist.expiredDateOtp = new Date(Date.now() + 20 * 1000);
@@ -220,7 +220,7 @@ const changePassword = async (req, res, next) => {
     //if otp expired
     if (userExist.expiredDateOtp.getTime() < Date.now()) {
         //generate otp
-        let secondForgetPassword = String(Number((0, nanoid_1.customAlphabet)("123456789", 6)()));
+        let secondForgetPassword = String((0, otp_1.generateOTP)());
         //add to otp
         userExist.otpEmail = secondForgetPassword;
         userExist.expiredDateOtp = new Date(Date.now() + 20 * 1000);
