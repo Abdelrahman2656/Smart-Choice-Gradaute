@@ -1,13 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.changePassword = exports.forgetPassword = exports.refreshToken = exports.activateAccount = exports.login = exports.ConfirmEmail = exports.signUp = void 0;
+const nanoid_1 = require("nanoid");
 const Database_1 = require("../../../Database");
 const AppError_1 = require("../../Utils/AppError/AppError");
 const messages_1 = require("../../Utils/constant/messages");
 const emailEvent_1 = require("../../Utils/Email/emailEvent");
 const encryption_1 = require("../../Utils/encryption");
 const token_1 = require("../../Utils/Token/token");
-const nanoid_1 = require("nanoid");
 //---------------------------------------------------Sign Up --------------------------------------------------------------
 const signUp = async (req, res, next) => {
     //get data from req

@@ -1,6 +1,6 @@
 import EventEmitter from "events";
-import { Hash } from "../encryption";
 import { User } from "../../../Database";
+import { Hash } from "../encryption";
 import { sendEmail } from "./email";
 import { emailHtml } from "./emailHtml";
 

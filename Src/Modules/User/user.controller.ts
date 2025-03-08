@@ -1,8 +1,8 @@
 import { Router } from "express";
 import { asyncHandler } from "../../Middleware/asyncHandler";
-import * as US from './user.service'
 import { isValid } from "../../Middleware/validation";
-import * as VA from'./user.validation'
+import * as US from './user.service';
+import * as VA from './user.validation';
 const userRouter = Router()
 // sign up
 userRouter.post('/signup',isValid(VA.signUpVal),asyncHandler(US.signUp))

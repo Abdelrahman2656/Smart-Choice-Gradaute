@@ -35,8 +35,8 @@ var __importStar = (this && this.__importStar) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const asyncHandler_1 = require("../../Middleware/asyncHandler");
-const US = __importStar(require("./user.service"));
 const validation_1 = require("../../Middleware/validation");
+const US = __importStar(require("./user.service"));
 const VA = __importStar(require("./user.validation"));
 const userRouter = (0, express_1.Router)();
 // sign up
