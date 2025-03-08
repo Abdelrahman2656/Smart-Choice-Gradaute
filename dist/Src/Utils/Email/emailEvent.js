@@ -33,26 +33,6 @@ exports.eventEmitter.on('sendEmail', (data) => __awaiter(void 0, void 0, void 0,
     });
 }));
 //second OTP to Confirm Password 
-// eventEmitter.on('resentOtp',async(data)=>{
-//     const {email}=data
-//     const user = await User.findOne({ email });
-//     if (!user || user.isConfirmed) return;
-//     // التحقق مما إذا كان OTP لا يزال نشطًا
-//     if (user.expiredDateOtp && user.expiredDateOtp.getTime() > Date.now()) {
-//       console.log(`🔄 OTP is still valid for ${email}, no need to resend.`);
-//       return;
-//     }
-//     const secondOtp = customAlphabet('123456789',6)()
-//     const hash= await Hash({key:secondOtp , SALT_ROUNDS:process.env.SALT_ROUNDS})
-//     const expiredDateOtp = new Date(Date.now() + 10 * 1000); // 30 seconds expiration
-//     await User.updateOne({email},{otpEmail:hash, expiredDateOtp})
-//     await sendEmail({
-//         to:email,
-//         subject:"Resend OTP To confirm Your Account",
-//         html:emailHtml(secondOtp )
-//     } )
-//     console.log(`New OTP sent to ${email}: ${secondOtp}`); // Debugging log
-// })
 //forget password
 exports.eventEmitter.on('forgetPassword', (data) => __awaiter(void 0, void 0, void 0, function* () {
     const { email, otpEmail, firstName, lastName } = data;
