@@ -16,7 +16,7 @@ const messages_1 = require("../../Utils/constant/messages");
 const emailEvent_1 = require("../../Utils/Email/emailEvent");
 const encryption_1 = require("../../Utils/encryption");
 const token_1 = require("../../Utils/Token/token");
-const otp_1 = require("../../Utils/otp");
+const nanoid_1 = require("nanoid");
 //---------------------------------------------------Sign Up --------------------------------------------------------------
 const signUp = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     //get data from req
@@ -190,7 +190,7 @@ const forgetPassword = (req, res, next) => __awaiter(void 0, void 0, void 0, fun
         return next(new AppError_1.AppError(messages_1.messages.user.AlreadyHasOtp, 400));
     }
     //generate OTP
-    let forgetOTP = String((0, otp_1.generateOTP)());
+    let forgetOTP = String(Number((0, nanoid_1.customAlphabet)("123456789", 6)()));
     //hash
     userExist.otpEmail = forgetOTP;
     userExist.expiredDateOtp = new Date(Date.now() + 20 * 1000);
@@ -229,7 +229,7 @@ const changePassword = (req, res, next) => __awaiter(void 0, void 0, void 0, fun
     //if otp expired
     if (userExist.expiredDateOtp.getTime() < Date.now()) {
         //generate otp
-        let secondForgetPassword = String((0, otp_1.generateOTP)());
+        let secondForgetPassword = String(Number((0, nanoid_1.customAlphabet)("123456789", 6)()));
         //add to otp
         userExist.otpEmail = secondForgetPassword;
         userExist.expiredDateOtp = new Date(Date.now() + 20 * 1000);

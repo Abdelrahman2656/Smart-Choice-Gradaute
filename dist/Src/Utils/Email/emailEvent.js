@@ -18,11 +18,11 @@ const encryption_1 = require("../encryption");
 const Database_1 = require("../../../Database");
 const email_1 = require("./email");
 const emailHtml_1 = require("./emailHtml");
-const otp_1 = require("../otp");
+const nanoid_1 = require("nanoid");
 exports.eventEmitter = new events_1.default;
 exports.eventEmitter.on('sendEmail', (data) => __awaiter(void 0, void 0, void 0, function* () {
     const { email, firstName, lastName } = data;
-    const otp = String((0, otp_1.generateOTP)());
+    const otp = String(Number((0, nanoid_1.customAlphabet)("123456789", 6)()));
     const hash = yield (0, encryption_1.Hash)({ key: otp, SALT_ROUNDS: process.env.SALT_ROUNDS });
     const expiredDateOtp = new Date(Date.now() + 5 * 60 * 1000);
     yield Database_1.User.updateOne({ email }, { otpEmail: hash, expiredDateOtp });

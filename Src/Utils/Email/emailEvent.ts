@@ -3,13 +3,14 @@ import { Hash } from "../encryption";
 import { User } from "../../../Database";
 import { sendEmail } from "./email";
 import { emailHtml } from "./emailHtml";
-import { generateOTP } from "../otp";
+
+import { customAlphabet } from "nanoid";
 
 export const eventEmitter = new EventEmitter
 
 eventEmitter.on('sendEmail',async(data)=>{
     const {email ,firstName,lastName}=data
-    const otp = String(generateOTP())
+    const otp = String(Number(customAlphabet("123456789", 6)()))
     const hash= await Hash({key: otp , SALT_ROUNDS:process.env.SALT_ROUNDS})
     const expiredDateOtp = new Date(Date.now() + 5* 60 * 1000);
     await User.updateOne({email},{otpEmail:hash, expiredDateOtp})

@@ -5,7 +5,7 @@ import { eventEmitter } from "../../Utils/Email/emailEvent";
 import { comparePassword, Encrypt, Hash } from "../../Utils/encryption";
 import { AppNext, AppRequest, AppResponse } from "../../Utils/type";
 import { generateToken, verifyToken } from "../../Utils/Token/token";
-import { generateOTP } from "../../Utils/otp";
+import { customAlphabet } from "nanoid";
 
 //---------------------------------------------------Sign Up --------------------------------------------------------------
 export const signUp = async (
@@ -211,7 +211,7 @@ export const forgetPassword = async (
     return next(new AppError(messages.user.AlreadyHasOtp, 400));
   }
   //generate OTP
-  let forgetOTP = String(generateOTP());
+  let forgetOTP = String(Number(customAlphabet("123456789", 6)()));
   //hash
   userExist.otpEmail = forgetOTP;
   userExist.expiredDateOtp = new Date(Date.now() + 20 * 1000);
@@ -256,7 +256,7 @@ export const changePassword = async (
   //if otp expired
   if (userExist.expiredDateOtp.getTime() < Date.now()) {
     //generate otp
-    let secondForgetPassword = String(generateOTP())
+    let secondForgetPassword = String(Number(customAlphabet("123456789", 6)()))
     //add to otp
     userExist.otpEmail = secondForgetPassword;
     userExist.expiredDateOtp = new Date(Date.now() + 20 * 1000);
