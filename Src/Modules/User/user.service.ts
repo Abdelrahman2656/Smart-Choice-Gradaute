@@ -1,10 +1,8 @@
-import { customAlphabet } from "nanoid";
 import { User } from "../../../Database";
 import { AppError } from "../../Utils/AppError/AppError";
 import { messages } from "../../Utils/constant/messages";
 import { eventEmitter } from "../../Utils/Email/emailEvent";
 import { comparePassword, Encrypt, Hash } from "../../Utils/encryption";
-
 import { AppNext, AppRequest, AppResponse } from "../../Utils/type";
 import { generateToken, verifyToken } from "../../Utils/Token/token";
 import { generateOTP } from "../../Utils/OTP/otp";

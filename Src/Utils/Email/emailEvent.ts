@@ -1,5 +1,4 @@
 import EventEmitter from "events";
-import{customAlphabet}from'nanoid'
 import { Hash } from "../encryption";
 import { User } from "../../../Database";
 import { sendEmail } from "./email";
