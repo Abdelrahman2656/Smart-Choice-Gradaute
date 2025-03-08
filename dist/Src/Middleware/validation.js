@@ -4,7 +4,7 @@ exports.isValid = void 0;
 const AppError_1 = require("../Utils/AppError/AppError");
 const isValid = (schema) => {
     return (req, res, next) => {
-        let data = Object.assign(Object.assign(Object.assign({}, req.body), req.params), req.query);
+        let data = { ...req.body, ...req.params, ...req.query };
         let { error } = schema.validate(data, { abortEarly: false });
         if (error) {
             const errMSG = error.details.map((err) => err.message);

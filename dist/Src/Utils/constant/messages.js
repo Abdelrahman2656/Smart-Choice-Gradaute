@@ -14,5 +14,19 @@ const generateMessage = (entity) => ({
     verifiedSuccessfully: `${entity} Verified Successfully`,
 });
 exports.messages = {
-    user: Object.assign(Object.assign({}, generateMessage("User")), { verified: "User Verified Successfully", notAuthorized: "not authorized to access this api", invalidCredential: "Something Wrong In Password", changePassword: "Password Changed Successfully", AlreadyHasOtp: "You Already Has OTP", checkEmail: "Check Your email", invalidOTP: "Invalid OTP", expireOTP: "OTP IS EXPIRE ", login: "Congratulation Please Login", loginSuccessfully: "User Login Successfully", Incorrect: "Incorrect In Email Or Password", AlreadyVerified: "You Already Verified" }),
+    user: {
+        ...generateMessage("User"),
+        verified: "User Verified Successfully",
+        notAuthorized: "not authorized to access this api",
+        invalidCredential: "Something Wrong In Password",
+        changePassword: "Password Changed Successfully",
+        AlreadyHasOtp: "You Already Has OTP",
+        checkEmail: "Check Your email",
+        invalidOTP: "Invalid OTP",
+        expireOTP: "OTP IS EXPIRE ",
+        login: "Congratulation Please Login",
+        loginSuccessfully: "User Login Successfully",
+        Incorrect: "Incorrect In Email Or Password",
+        AlreadyVerified: "You Already Verified"
+    },
 };

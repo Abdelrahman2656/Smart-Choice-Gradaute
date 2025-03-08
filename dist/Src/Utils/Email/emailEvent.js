@@ -1,13 +1,4 @@
 "use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -20,28 +11,28 @@ const email_1 = require("./email");
 const emailHtml_1 = require("./emailHtml");
 const nanoid_1 = require("nanoid");
 exports.eventEmitter = new events_1.default;
-exports.eventEmitter.on('sendEmail', (data) => __awaiter(void 0, void 0, void 0, function* () {
+exports.eventEmitter.on('sendEmail', async (data) => {
     const { email, firstName, lastName } = data;
     const otp = String(Number((0, nanoid_1.customAlphabet)("123456789", 6)()));
-    const hash = yield (0, encryption_1.Hash)({ key: otp, SALT_ROUNDS: process.env.SALT_ROUNDS });
+    const hash = await (0, encryption_1.Hash)({ key: otp, SALT_ROUNDS: process.env.SALT_ROUNDS });
     const expiredDateOtp = new Date(Date.now() + 5 * 60 * 1000);
-    yield Database_1.User.updateOne({ email }, { otpEmail: hash, expiredDateOtp });
-    yield (0, email_1.sendEmail)({
+    await Database_1.User.updateOne({ email }, { otpEmail: hash, expiredDateOtp });
+    await (0, email_1.sendEmail)({
         to: email,
         subject: "Please Verify",
         html: (0, emailHtml_1.emailHtml)(otp, `${firstName} ${lastName}`)
     });
-}));
+});
 //second OTP to Confirm Password 
 //forget password
-exports.eventEmitter.on('forgetPassword', (data) => __awaiter(void 0, void 0, void 0, function* () {
+exports.eventEmitter.on('forgetPassword', async (data) => {
     const { email, otpEmail, firstName, lastName } = data;
-    yield (0, email_1.sendEmail)({
+    await (0, email_1.sendEmail)({
         to: email,
         subject: "OTP Forget Password",
         html: (0, emailHtml_1.emailHtml)(otpEmail, `${firstName} ${lastName}`)
     });
-}));
+});
 //second OTP to Confirm Password 
 // eventEmitter.on('resentOtp',async(data)=>{
 //     const {email}=data
@@ -64,11 +55,11 @@ exports.eventEmitter.on('forgetPassword', (data) => __awaiter(void 0, void 0, vo
 //     console.log(`New OTP sent to ${email}: ${secondOtp}`); // Debugging log
 // })
 //resend forget password
-exports.eventEmitter.on('resendForgetPassword', (data) => __awaiter(void 0, void 0, void 0, function* () {
+exports.eventEmitter.on('resendForgetPassword', async (data) => {
     const { email, otpEmail, firstName, lastName } = data;
-    yield (0, email_1.sendEmail)({
+    await (0, email_1.sendEmail)({
         to: email,
         subject: "Resend OTP Forget Password",
         html: (0, emailHtml_1.emailHtml)(otpEmail, `${firstName} ${lastName}`)
     });
-}));
+});
