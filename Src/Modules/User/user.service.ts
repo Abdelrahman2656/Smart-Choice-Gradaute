@@ -5,7 +5,7 @@ import { eventEmitter } from "../../Utils/Email/emailEvent";
 import { comparePassword, Encrypt, Hash } from "../../Utils/encryption";
 import { AppNext, AppRequest, AppResponse } from "../../Utils/type";
 import { generateToken, verifyToken } from "../../Utils/Token/token";
-import { generateOTP } from "../../Utils/Otp/otp";
+import { generateOTP } from "../../Utils/otp";
 
 //---------------------------------------------------Sign Up --------------------------------------------------------------
 export const signUp = async (

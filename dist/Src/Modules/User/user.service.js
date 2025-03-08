@@ -16,7 +16,7 @@ const messages_1 = require("../../Utils/constant/messages");
 const emailEvent_1 = require("../../Utils/Email/emailEvent");
 const encryption_1 = require("../../Utils/encryption");
 const token_1 = require("../../Utils/Token/token");
-const otp_1 = require("../../Utils/Otp/otp");
+const otp_1 = require("../../Utils/otp");
 //---------------------------------------------------Sign Up --------------------------------------------------------------
 const signUp = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     //get data from req

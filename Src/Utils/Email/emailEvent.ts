@@ -3,7 +3,7 @@ import { Hash } from "../encryption";
 import { User } from "../../../Database";
 import { sendEmail } from "./email";
 import { emailHtml } from "./emailHtml";
-import { generateOTP } from "../Otp/otp";
+import { generateOTP } from "../otp";
 
 export const eventEmitter = new EventEmitter
 
