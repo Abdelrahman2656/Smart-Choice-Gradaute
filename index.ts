@@ -7,6 +7,5 @@ const port = process.env.PORT||3001
 
 //bootstrap
 bootstrap(app, express)
-export default app;
+export default app
 app.get('/', (req:AppRequest, res:AppResponse) => res.send('Hello World! g'))
-app.listen(port, () => console.log(`Example app listening on port ${port}!`))
