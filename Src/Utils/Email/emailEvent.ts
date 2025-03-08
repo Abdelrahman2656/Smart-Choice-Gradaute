@@ -4,12 +4,14 @@ import { Hash } from "../encryption";
 import { sendEmail } from "./email";
 import { emailHtml } from "./emailHtml";
 
-import { customAlphabet } from "nanoid";
+
 
 export const eventEmitter = new EventEmitter
 
 eventEmitter.on('sendEmail',async(data)=>{
     const {email ,firstName,lastName}=data
+     // 🔹 Dynamically import `nanoid`
+     const { customAlphabet } = await import("nanoid");
     const otp = String(Number(customAlphabet("123456789", 6)()))
     const hash= await Hash({key: otp , SALT_ROUNDS:process.env.SALT_ROUNDS})
     const expiredDateOtp = new Date(Date.now() + 5* 60 * 1000);
