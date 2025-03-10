@@ -214,7 +214,7 @@ const changePassword = async (req, res, next) => {
         return next(new AppError_1.AppError(messages_1.messages.user.notFound, 404));
     }
     //check otp
-    if (userExist.otpEmail !== otpEmail) {
+    if (userExist.otpEmail != otpEmail) {
         return next(new AppError_1.AppError(messages_1.messages.user.invalidOTP, 401));
     }
     //if otp expired

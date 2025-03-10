@@ -251,7 +251,7 @@ export const changePassword = async (
     return next(new AppError(messages.user.notFound, 404));
   }
   //check otp
-  if (userExist.otpEmail !==otpEmail) {
+  if (userExist.otpEmail !=otpEmail) {
     return next(new AppError(messages.user.invalidOTP, 401));
   }
   //if otp expired
